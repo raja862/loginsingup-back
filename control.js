@@ -31,7 +31,6 @@ console.log(error)
 
 
 
-
 export const getUser=async(req,res)=>{
 
     try{
