@@ -58,26 +58,37 @@ res.status(500).json({message:"login faild"})
 }
 
 
-export const userprofile =async (req, res) => {
-    try {
-      const userId = req.userId;
-      const user = await User.findById(userId);
 
-      if (!user) {
-        return res.status(404).json({ message: 'User not found' });
-      }
 
-      res.status(200).json({
-        age: user.age,
-        gender: user.gender,
-        dob: user.dob,
-        mobile: user.mobile,
-      });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Internal Server Error' });
-    }
+export const getOne=async(req,res)=>{
+  try{
+const empId= req.params.id
+const resp= await User.findById(empId)
+res.status(200).json(resp)
   }
+  catch(error){
+res.status(500).json(error)
+  }
+}
+
+export const updateOne=async(req,res)=>{
+  try{
+const empId=req.params.id
+    const {age,gender,dob,mobile}=req.body
+
+const result= await User.updateOne({_id:empId},{age,gender,dob,mobile})
+if(result.matchedCount===0){
+  return res.status(400).json({message:"this no id matched"})
+}
+const updated= await User.findById(empId)
+res.status(200).json({message:"updated", data:updated})
+  }
+
+  catch(error){
+res.status(500).json({message:"error not updated user"})
+  }
+}
+
 
 
 
