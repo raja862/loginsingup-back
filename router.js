@@ -1,7 +1,6 @@
 import { createUser, getOne, getUser,updateOne} from "./control.js";
 import express from "express"
 
-
  const router = express.Router()
 
 
