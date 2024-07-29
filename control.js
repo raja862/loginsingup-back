@@ -45,7 +45,7 @@ if(!passwordMatch){
     return res.status(401).json({message:"password not correct"})
 }
 
-const token=jwt.sign({_id:user._id},pass,{expiresIn:'4d'})
+const token=jwt.sign({_id:user._id},pass,{expiresIn:'4m'})
 user.token=token
 await user.save()
 
